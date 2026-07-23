@@ -9,12 +9,15 @@ public class Main {
         LedSim ledSim = LedSim.createRows(100);
 
         LedController controller = new LedController(ledSim);
-        controller.addAnimation(new BlinkAnimation(Color.RED), 4); 
-        controller.play();
-        controller.addAnimation(new SnakeAnimation(Color.GREEN, Color.BLACK, 2.0, 5), 10); //נחש ירוק על רקע שחור במהירות של 2 לדים בשניה וגודלו 5 לדים. 
-        controller.play();
+        Animation sequenceGroup = new SequentialAnimationGroup(
+            5, 
+            new SolidAnimation(Color.RED),  
+            new SnakeAnimation(Color.GREEN, Color.BLACK, 2, 5),        
+            new BlinkAnimation(Color.BLUE)            
+        );
         
-        
+        controller.addAnimation(sequenceGroup, 20);
+        controller.play();
         
         
 
