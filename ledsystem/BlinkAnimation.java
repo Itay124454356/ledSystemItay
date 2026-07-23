@@ -17,9 +17,9 @@ public class BlinkAnimation implements Animation {
         
     
         if (stopWatch.get()%4 < 2) {
-            strip.setAll(Color.WHITE);
-        } else {
             strip.setAll(this.color);
+        } else {
+            strip.setAll(Color.WHITE);
         }
         strip.apply();
     
