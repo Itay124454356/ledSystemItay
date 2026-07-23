@@ -1,5 +1,4 @@
 package ledsystem;
-
 import java.awt.Color;
 import ledsystem.ledssim.LedSim;
 
@@ -9,8 +8,9 @@ public class Main {
 
         LedSim ledSim = LedSim.createRows(100);
 
-        SolidAnimation solidAnimation = new SolidAnimation(Color.BLUE);
-        solidAnimation.apply(ledSim);
+        LedController controller = new LedController(ledSim);
+        controller.addAnimation(new SolidAnimation(Color.RED));
+        controller.play();
 
         long totalRuntime = System.currentTimeMillis() - startTime;
         System.out.println("Program ended. Total runtime: " + totalRuntime + " ms");
