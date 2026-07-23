@@ -9,10 +9,15 @@ public class Main {
         LedSim ledSim = LedSim.createRows(100);
 
         LedController controller = new LedController(ledSim);
-        controller.addAnimation(new SolidAnimation(Color.RED));
-        controller.play();
+        controller.addAnimation(new BlinkAnimation(Color.RED)); 
+        while (true) {  //עשיתי את זה כדי שהאנימציה תמשיך לרוץ כל הזמן(לא נתנו זמן מוגדר שהאנימציה תרוץ)
+            controller.play();
+        }
+        
+        
+        
 
-        long totalRuntime = System.currentTimeMillis() - startTime;
-        System.out.println("Program ended. Total runtime: " + totalRuntime + " ms");
+        //long totalRuntime = System.currentTimeMillis() - startTime;
+        //System.out.println("Program ended. Total runtime: " + totalRuntime + " ms");
     }
 }
