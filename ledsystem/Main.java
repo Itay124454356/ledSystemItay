@@ -9,7 +9,7 @@ public class Main {
         LedSim ledSim = LedSim.createRows(100);
 
         LedController controller = new LedController(ledSim);
-        controller.addAnimation(new BlinkAnimation(Color.RED), 5); // הוספתי את ההגדרה של הזמן בלד קונטרולר(בשניות)
+        controller.addAnimation(new BlinkAnimation(Color.RED), 5.0);
             controller.play();
         
         
