@@ -20,7 +20,9 @@ public class BlinkAnimation implements Animation {
 
     @Override
     public void apply(LedStrip strip) {
-        if (strip == null) return;
+        if (strip == null) {
+            throw new IllegalArgumentException("LedStrip cannot be null.");
+        }
 
         if (stopWatch.get() % 4 < 2) {
             strip.setAll(Color.WHITE);

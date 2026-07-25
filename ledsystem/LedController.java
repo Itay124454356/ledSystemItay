@@ -9,14 +9,18 @@ public class LedController {
     private List<Animation> animations;
 
     public LedController(LedStrip strip) {
+        if (strip == null) {
+            throw new IllegalArgumentException("LedStrip cannot be null.");
+        }
         this.strip = strip;
         this.animations = new ArrayList<>();
     }
 
     public void addAnimation(Animation animation) {
-        if (animation != null) {
-            this.animations.add(animation);
+        if (animation == null) {
+            throw new IllegalArgumentException("Animation cannot be null.");
         }
+        this.animations.add(animation);
     }
 
     public void play() {
