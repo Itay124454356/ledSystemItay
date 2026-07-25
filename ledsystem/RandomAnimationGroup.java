@@ -10,23 +10,33 @@ public class RandomAnimationGroup implements Animation {
     private StopWatch stopWatch;
     private Random random;
     private int currentRandomIndex;
-    private boolean isStarted = false;
 
     public RandomAnimationGroup(double durationPerAnimation, Animation... animations) {
+        if (durationPerAnimation <= 0) {
+            throw new IllegalArgumentException("Duration per animation must be greater than zero.");
+        }
+        if (animations == null || animations.length == 0) {
+            throw new IllegalArgumentException("Animations array cannot be null or empty.");
+        }
+        for (Animation anim : animations) {
+            if (anim == null) {
+                throw new IllegalArgumentException("Animation in group cannot be null.");
+            }
+        }
+
         this.durationPerAnimation = durationPerAnimation;
         this.animations = animations;
         this.stopWatch = new StopWatch();
         this.random = new Random();
+        
+        this.stopWatch.start();
+        this.currentRandomIndex = random.nextInt(animations.length);
     }
 
     @Override
     public void apply(LedStrip strip) {
-        if (animations == null || animations.length == 0) return;
-
-        if (!isStarted) {
-            stopWatch.start();
-            currentRandomIndex = random.nextInt(animations.length);
-            isStarted = true;
+        if (strip == null) {
+            throw new IllegalArgumentException("LedStrip cannot be null.");
         }
 
         if (stopWatch.get() >= durationPerAnimation) {
