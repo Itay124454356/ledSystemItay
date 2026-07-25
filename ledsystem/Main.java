@@ -1,6 +1,6 @@
 package ledsystem;
+import java.awt.Color;
 import ledsystem.ledssim.LedSim;
-
 public class Main {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
@@ -8,7 +8,7 @@ public class Main {
         LedSim ledSim = LedSim.createRows(100);
 
         LedController controller = new LedController(ledSim);
-        controller.addAnimation(new BlinkAnimation(null)); 
+        controller.addAnimation(new BlinkAnimation(Color.RED)); 
         controller.play();
 
         long totalRuntime = System.currentTimeMillis() - startTime;

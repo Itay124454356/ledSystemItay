@@ -24,8 +24,10 @@ public class LedController {
     }
 
     public void play() {
-        for (Animation animation : animations) {
-            animation.apply(strip);
+        while (true) {
+            for (Animation animation : animations) {
+                animation.apply(strip);
+            }
         }
     }
 }
