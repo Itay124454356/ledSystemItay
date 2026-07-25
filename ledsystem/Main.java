@@ -9,8 +9,8 @@ public class Main {
         LedSim ledSim = LedSim.createRows(100);
 
         LedController controller = new LedController(ledSim);
-        controller.addAnimation(new BlinkAnimation(Color.RED), 5.0);
-            controller.play();
+        controller.addAnimation(new BlinkAnimation(Color.RED), 10);
+        controller.play();
         
         
         

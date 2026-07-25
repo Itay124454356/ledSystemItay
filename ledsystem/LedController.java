@@ -13,6 +13,9 @@ public class LedController {
     private StopWatch stopwatch;
 
     public LedController(LedStrip strip) {
+        if (strip == null) {
+            throw new IllegalArgumentException("LedStrip cannot be null.");
+        }
         this.strip = strip;
         this.animations = new ArrayList<>();
         this.durations = new ArrayList<>();
@@ -20,10 +23,15 @@ public class LedController {
     }
 
     public void addAnimation(Animation animation, double duration) {
-        if (animation != null) {
-            this.animations.add(animation);
-            this.durations.add(duration);
+        if (animation == null) {
+            throw new IllegalArgumentException("Animation cannot be null.");
         }
+        if (duration <= 0) {
+            throw new IllegalArgumentException("Duration must be greater than zero.");
+        }
+
+        this.animations.add(animation);
+        this.durations.add(duration);
     }
 
     public void play() {
