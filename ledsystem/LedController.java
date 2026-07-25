@@ -1,20 +1,26 @@
 package ledsystem;
 
+import java.util.ArrayList;
+import java.util.List;
 import ledsystem.ledssim.LedStrip;
 
 public class LedController {
     private LedStrip strip;
-    private Animation animation;
+    private List<Animation> animations;
 
     public LedController(LedStrip strip) {
         this.strip = strip;
+        this.animations = new ArrayList<>();
     }
 
     public void addAnimation(Animation animation) {
-        this.animation = animation;
-    }
-    public void play() {
         if (animation != null) {
+            this.animations.add(animation);
+        }
+    }
+
+    public void play() {
+        for (Animation animation : animations) {
             animation.apply(strip);
         }
     }
