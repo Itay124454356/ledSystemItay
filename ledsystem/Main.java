@@ -1,29 +1,36 @@
 package ledsystem;
 
 import java.awt.Color;
-
 import ledsystem.ledssim.LedSim;
-
 public class Main {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
-
-        // Initialize the LED simulation with a row layout
         LedSim ledSim = LedSim.createRows(100);
 
-        // Set all LEDs to a specific color
-        ledSim.setAll(Color.CYAN);
+        LedController controller = new LedController(ledSim);
+        controller.setAnimationForState(RobotState.IDLE, new SolidAnimation(Color.GREEN));
+        controller.setAnimationForState(RobotState.COLLECTING, new SnakeAnimation(Color.RED, Color.BLACK, 3, 5));
+        controller.setAnimationForState(RobotState.SCORE_SUCCESS, new BlinkAnimation(Color.BLUE));
+        controller.setAnimationForState(RobotState.DISABLED, new SolidAnimation(Color.RED));
 
-        // Set a multiple LEDs to different colors
-        ledSim.setRange(Color.ORANGE, 20, 40);;
+        System.out.println("Robot Status: IDLE");
+        controller.playState(RobotState.IDLE);
+       
+        System.out.println("Robot Status: COLLECTING");
+        controller.playState(RobotState.COLLECTING);
 
-        // Set one LED to red
-        ledSim.setLed(Color.RED, 5);
+        System.out.println("Robot Status: SCORE_SUCCESS!");
+        controller.playState(RobotState.SCORE_SUCCESS);
 
-        // Apply the changes to the simulation
-        ledSim.apply();
-
+        System.out.println("Robot Status: DISABLED");
+        controller.playState(RobotState.DISABLED);
+        
         long totalRuntime = System.currentTimeMillis() - startTime;
         System.out.println("Program ended. Total runtime: " + totalRuntime + " ms");
     }
 }
+        
+        
+
+        
+
