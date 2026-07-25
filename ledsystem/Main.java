@@ -11,7 +11,7 @@ public class Main {
         LedController controller = new LedController(ledSim);
         controller.addAnimation(new BlinkAnimation(Color.RED), 4); 
         controller.play();
-        controller.addAnimation(new SnakeAnimation(Color.GREEN, Color.BLACK, 2.0, 5), 10); //נחש ירוק על רקע שחור במהירות של 2 לדים בשניה וגודלו 5 לדים. 
+        controller.addAnimation(new SnakeAnimation(Color.GREEN, Color.BLACK, 2.0, 5), 10); //create a SnakeAnimation with green color, black background, speed of 2.0, and length of 5
         controller.play();
         
         
