@@ -8,8 +8,19 @@ public class SequentialAnimationGroup implements Animation {
     private double durationPerAnimation; 
     private StopWatch stopWatch;
 
- 
     public SequentialAnimationGroup(double durationPerAnimation, Animation... animations) {
+        if (durationPerAnimation <= 0) {
+            throw new IllegalArgumentException("Duration per animation must be greater than zero.");
+        }
+        if (animations == null || animations.length == 0) {
+            throw new IllegalArgumentException("Animations array cannot be null or empty.");
+        }
+        for (Animation anim : animations) {
+            if (anim == null) {
+                throw new IllegalArgumentException("Animation in group cannot be null.");
+            }
+        }
+
         this.durationPerAnimation = durationPerAnimation;
         this.animations = animations;
         this.stopWatch = new StopWatch();
@@ -18,14 +29,13 @@ public class SequentialAnimationGroup implements Animation {
 
     @Override
     public void apply(LedStrip strip) {
-        if (animations == null || animations.length == 0) return;
+        if (strip == null) {
+            throw new IllegalArgumentException("LedStrip cannot be null.");
+        }
 
         double elapsedTime = stopWatch.get();
+        int currentIndex = (int) (elapsedTime / durationPerAnimation) % animations.length;
 
-        int currentIndex = (int) (elapsedTime / durationPerAnimation);
-
-        if (currentIndex < animations.length) {
-            animations[currentIndex].apply(strip);
-        }
+        animations[currentIndex].apply(strip);
     }
 }

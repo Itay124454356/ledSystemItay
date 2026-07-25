@@ -14,8 +14,17 @@ public class SnakeAnimation implements Animation {
     private boolean isInitialized = false;
     private int lastHead = -1;
 
-
     public SnakeAnimation(Color color, Color backgroundColor, double speed, int length) {
+        if (color == null) {
+            throw new IllegalArgumentException("Color cannot be null.");
+        }
+        if (backgroundColor == null) {
+            throw new IllegalArgumentException("Background color cannot be null.");
+        }
+        if (speed <= 0) {
+            throw new IllegalArgumentException("Speed must be greater than zero.");
+        }
+
         this.color = color;
         this.backgroundColor = backgroundColor;
         this.speed = speed;
@@ -24,17 +33,19 @@ public class SnakeAnimation implements Animation {
         this.stopWatch.start();
     }
 
-
-
     @Override
     public void apply(LedStrip strip) {
+        if (strip == null) {
+            throw new IllegalArgumentException("LedStrip cannot be null.");
+        }
+
         int totalLeds = strip.getLedCount();
         if (totalLeds == 0) return;
 
         if (!isInitialized) {
             strip.setAll(this.backgroundColor);
             isInitialized = true;
-        }//עשיתי את זה כדי שהאיפוס של הצבע של הלוח לא יפריע ללדים של הנחש (הלדים של הנחש כל הזמן התחילו להבהב בגלל האיפוס של צבע הלוח)
+        }
 
         int currentHead = (int) (stopWatch.get() * speed) % totalLeds;
 
